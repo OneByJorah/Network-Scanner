@@ -261,4 +261,15 @@ Network Scanner is for educational and authorized testing purposes only. Users a
 
 ---
 
+## 🔀 Fork Notes
+
+This repository is a fork of the upstream Network-Scanner project maintained by **OneByJorah**.
+
+**Changes from upstream:**
+- `.env.example` already present (enhanced with additional configuration options)
+- `Dockerfile.backend` and `Dockerfile.frontend` already present
+- `docker-compose.yml` already present with Redis, PostgreSQL, backend, frontend, and Nginx
+
+---
+
 **Made with ❤️ for the cybersecurity community**
