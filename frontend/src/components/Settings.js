@@ -39,7 +39,7 @@ import {
   Api as ApiIcon,
   Notifications as NotificationsIcon,
   Settings as SettingsIcon,
-  StorageIcon,
+  Dns as DnsIcon,
   NetworkCheck as NetworkIcon
 } from '@mui/icons-material';
 import { useScan } from '../context/ScanContext';
@@ -439,7 +439,7 @@ const Settings = ({ showNotification }) => {
           <Accordion>
             <AccordionSummary expandIcon={<ExpandMoreIcon />}>
               <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                <StorageIcon />
+                <DnsIcon />
                 <Typography variant="h6">Report Settings</Typography>
               </Box>
             </AccordionSummary>
