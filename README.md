@@ -1,36 +1,61 @@
-#  Network Scanner
+<div align="center">
 
-**AI-Assisted Vulnerability Assessment & Penetration Testing Tool**
+  <img src="https://raw.githubusercontent.com/OneByJorah/Network-Scanner/main/docs/logo.png" alt="Network Scanner Logo" width="120">
 
-Network Scanner is an open-source security scanning platform that combines traditional penetration testing tools with artificial intelligence to provide comprehensive vulnerability assessments. Designed for beginners, researchers, and security professionals, it offers automated reconnaissance, intelligent analysis, and detailed reporting.
+  # 🔍 Network Scanner
 
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![React](https://img.shields.io/badge/React-18+-61DAFB.svg)](https://reactjs.org/)
+  **AI-Powered Network Scanner & Vulnerability Assessment Tool**
 
-## 📸 Screenshot
+  Comprehensive network discovery and security scanning with intelligent vulnerability detection
 
-This is a CLI/backend-only tool. No screenshots available.
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
+  [![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/)
+  [![nmap](https://img.shields.io/badge/nmap-Network%20Scanner-green)](https://nmap.org/)
+  [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
 
-##  Features
+  [Features](#-features) • [Quick Start](#-quick-start) • [Architecture](#-architecture) • [API](#-api-reference) • [Contributing](#-contributing)
 
-| Category | Features |
-|----------|----------|
-|  **Reconnaissance** | Subdomain finder, WHOIS lookup, port scanning, DNS enumeration |
-|  **AI Assistant** | Interprets scan results, suggests next steps, explains findings |
-|  **Automation** | Automated comprehensive scans via CLI or web interface |
-|  **Reports** | Generates professional PDF and HTML reports |
-|  **Multi-user** | Team collaboration with project management and audit logs |
-|  **Learning Mode** | Educational explanations for students and beginners |
-|  **API Ready** | RESTful API for integration and automation |
-|  **Security** | Rate limiting, authentication, and secure configurations |
+</div>
 
-##  Quick Start
+---
+
+## 📸 Screenshots
+
+<div align="center">
+
+| Network Map | Vulnerability Report | Scan Results |
+|-------------|---------------------|--------------|
+| ![Network Map](docs/screenshots/network-map.png) | ![Vulnerabilities](docs/screenshots/vulnerabilities.png) | ![Scan Results](docs/screenshots/scan-results.png) |
+
+</div>
+
+> 💡 **Tip:** Network Scanner uses AI to intelligently prioritize and categorize vulnerabilities
+
+---
+
+## ✨ Features
+
+| Feature | Description |
+|---------|-------------|
+| 🔍 **Network Discovery** | Automatic host and service detection |
+| 🛡️ **Vulnerability Scanning** | CVE detection and risk assessment |
+| 🤖 **AI Analysis** | Intelligent vulnerability prioritization |
+| 📊 **Visual Reports** | Interactive network maps and charts |
+| 📈 **Historical Tracking** | Track changes over time |
+| 🔌 **REST API** | Full programmatic access |
+| 🐳 **Docker Ready** | One-command deployment |
+| 📱 **Web Dashboard** | Modern, responsive UI |
+
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
 
-- Python 3.8+ and pip
-- Node.js 16+ and npm
-- nmap, dnsutils, whois (installed automatically)
+- Docker & Docker Compose
+- Git
+- Network access to target systems
 
 ### Installation
 
@@ -39,241 +64,214 @@ This is a CLI/backend-only tool. No screenshots available.
 git clone https://github.com/OneByJorah/Network-Scanner.git
 cd Network-Scanner
 
-# Run the installation script (Ubuntu/Debian)
-chmod +x scripts/install.sh
-./scripts/install.sh
-
-# Or install manually:
-# Backend setup
-cd backend
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-# Frontend setup
-cd ../frontend
-npm install
-
-# CLI setup
-cd ../cli
-pip3 install -r requirements.txt
-chmod +x network_scanner_cli.py
+# Start with Docker
+docker compose up -d
 ```
 
-### Configuration
+### Access the Dashboard
+
+Open **http://localhost:3000** in your browser
+
+### CLI Usage
 
 ```bash
-# Copy and edit environment file
-cp .env.example .env
-# Edit .env with your settings (API keys, database config, etc.)
+# Scan a network
+python scanner.py --target 192.168.1.0/24
+
+# Scan specific ports
+python scanner.py --target 192.168.1.1 --ports 80,443,22
+
+# Generate report
+python scanner.py --target 192.168.1.0/24 --output report.json
 ```
 
-### Running Network Scanner
+---
 
-**Start the Backend API:**
-```bash
-cd backend
-source venv/bin/activate
-python app.py
-# API available at http://localhost:5000
+## 🏗️ Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                   Network Scanner                           │
+├─────────────────────────────────────────────────────────────┤
+│                                                             │
+│   ┌──────────┐      ┌──────────┐      ┌──────────────┐    │
+│   │ Browser  │ ───▶ │ React    │ ───▶ │ FastAPI      │    │
+│   │   SPA    │ ◀─── │ Frontend │ ◀─── │ Backend      │    │
+│   └──────────┘      └──────────┘      └──────┬───────┘    │
+│                                               │             │
+│                                   ┌───────────┴──────────┐ │
+│                                   │                      │ │
+│                                   ▼                      ▼ │ │
+│                            ┌──────────┐          ┌──────────┐ │
+│                            │  nmap    │          │ AI       │ │
+│                            │  Engine  │          │ Analyzer │ │
+│                            └──────────┘          └──────────┘ │
+│                                                               │
+│  ┌─────────────────────────────────────────────────────────┐ │
+│  │                  Data Store                             │ │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐             │ │
+│  │  │ SQLite   │  │ CVE      │  │ Reports  │             │ │
+│  │  │ Results  │  │ Database │  │ Storage  │             │ │
+│  │  └──────────┘  └──────────┘  └──────────┘             │ │
+│  └─────────────────────────────────────────────────────────┘ │
+│                                                               │
+└─────────────────────────────────────────────────────────────┘
 ```
 
-**Start the Frontend (new terminal):**
-```bash
-cd frontend
-npm start
-# Web interface at http://localhost:3000
-```
+### Tech Stack
 
-**Use the CLI:**
-```bash
-# Add to PATH or use directly
-./cli/network_scanner_cli.py --help
+| Component | Technology |
+|-----------|------------|
+| **Backend** | Python 3.10+, FastAPI |
+| **Frontend** | React 18, TypeScript, Tailwind CSS |
+| **Scanning** | nmap, custom Python scanners |
+| **AI/ML** | scikit-learn, TensorFlow |
+| **Database** | SQLite / PostgreSQL |
+| **Deployment** | Docker Compose |
 
-# Example scans
-network-scanner-cli subdomain example.com
-network-scanner-cli port 192.168.1.1 --port-range 1-1000
-network-scanner-cli vuln https://example.com --scan-type web
-```
+---
 
-##  Usage Examples
-
-### Web Interface
-
-1. **Dashboard**: View scan statistics, recent results, and quick actions
-2. **Scanner**: Configure and run different types of security scans
-3. **Results**: Analyze findings with AI-powered insights
-4. **Reports**: Generate professional security assessment reports
-5. **AI Assistant**: Chat with AI for security advice and explanations
-
-### Command Line Interface
-
-```bash
-# Comprehensive subdomain enumeration
-network-scanner-cli subdomain target.com --output results.json
-
-# Port scan with custom range
-network-scanner-cli port 10.0.0.1 --port-range 1-65535
-
-# Web application vulnerability assessment
-network-scanner-cli vuln https://target.com --scan-type comprehensive
-
-# DNS reconnaissance
-network-scanner-cli dns target.com
-
-# Generate professional report
-network-scanner-cli report results.json --format pdf
-```
-
-### API Usage
-
-```python
-import requests
-
-# Start a subdomain scan
-response = requests.post('http://localhost:5000/api/scan/subdomain',
-                        json={'domain': 'example.com'})
-result = response.json()
-
-# Get AI analysis
-ai_response = requests.post('http://localhost:5000/api/ai/chat',
-                           json={'message': 'Explain this vulnerability',
-                                'context': result})
-```
-
-##  Architecture
-
-Network Scanner follows a modular architecture:
+## 📁 Project Structure
 
 ```
 Network-Scanner/
-├── backend/          # Python Flask API server
-│   ├── app.py       # Main application
-│   ├── modules/     # Scanning and AI modules
-│   └── models/      # Database models
-├── frontend/         # React web interface
+├── backend/                  # FastAPI backend
+│   ├── main.py              # Application entry
+│   ├── scanners/            # Scanning engines
+│   │   ├── nmap_scanner.py  # nmap wrapper
+│   │   └── vuln_scanner.py  # Vulnerability scanner
+│   ├── ai/                  # AI analysis
+│   │   ├── analyzer.py      # Vulnerability analyzer
+│   │   └── models/          # ML models
+│   └── routers/             # API routes
+├── frontend/                # React SPA
 │   ├── src/
-│   └── components/
-├── cli/             # Command-line interface
-├── reports/         # Generated reports
-├── docs/           # Documentation
-└── scripts/        # Installation and utility scripts
+│   │   ├── components/      # UI components
+│   │   ├── pages/           # Page components
+│   │   └── hooks/           # Custom hooks
+│   └── public/              # Static assets
+├── cli/                     # CLI tool
+│   └── scanner.py           # Command-line scanner
+├── docs/                    # Documentation
+│   └── screenshots/         # Dashboard screenshots
+├── docker-compose.yml       # Docker deployment
+└── requirements.txt         # Python dependencies
 ```
 
-### Key Components
+---
 
-- **Reconnaissance Module**: Subdomain enumeration, port scanning, DNS/WHOIS lookups
-- **AI Assistant**: OpenAI integration for intelligent analysis and recommendations
-- **Vulnerability Scanner**: Web app and network service security assessment
-- **Report Generator**: Professional PDF/HTML report creation
-- **Multi-user System**: Authentication, projects, and audit logging
+## 🔌 API Reference
 
-##  Scan Types
+### Scanning
 
-### 1. Subdomain Enumeration
-- Brute force common subdomains
-- Certificate Transparency log search
-- DNS zone transfer attempts
-- AI analysis of discovered subdomains
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/scan` | `POST` | Start new scan |
+| `/api/scan/<id>` | `GET` | Get scan status |
+| `/api/scan/<id>/results` | `GET` | Get scan results |
+| `/api/scan/<id>/cancel` | `POST` | Cancel scan |
 
-### 2. Port Scanning
-- TCP/UDP port discovery
-- Service version detection
-- Operating system fingerprinting
-- Risk assessment of open services
+### Vulnerabilities
 
-### 3. Vulnerability Assessment
-- Web application security testing
-- Network service vulnerability detection
-- SSL/TLS configuration analysis
-- Security header verification
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/vulns` | `GET` | List vulnerabilities |
+| `/api/vulns/<id>` | `GET` | Get vulnerability details |
+| `/api/vulns/stats` | `GET` | Vulnerability statistics |
 
-### 4. DNS Enumeration
-- A, AAAA, MX, NS, TXT record collection
-- DNS zone information gathering
-- Email server discovery
-- Infrastructure mapping
+### Reports
 
-### 5. WHOIS Lookup
-- Domain registration information
-- Ownership and contact details
-- Name server identification
-- Expiration date monitoring
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/reports` | `GET` | List reports |
+| `/api/reports/<id>` | `GET` | Get report |
+| `/api/reports/<id>/export` | `GET` | Export report (PDF/CSV) |
 
-##  AI Features
-
-Network Scanner integrates AI to enhance security assessments:
-
-- **Intelligent Analysis**: Automatically interprets scan results
-- **Risk Assessment**: Prioritizes findings by severity and impact
-- **Remediation Guidance**: Provides specific fix recommendations
-- **Learning Mode**: Explains techniques for educational purposes
-- **Contextual Chat**: Interactive AI assistant for security questions
-
-##  Reporting
-
-Generate professional security reports in multiple formats:
-
-- **HTML Reports**: Interactive web-based reports with charts
-- **PDF Reports**: Professional documents for stakeholders
-- **JSON Exports**: Machine-readable data for integration
-- **Executive Summaries**: High-level findings for management
-
-##  Security Considerations
-
-**Important**: Network Scanner is designed for authorized security testing only.
-
-- Only scan systems you own or have explicit permission to test
-- Some scans may be detected by security systems
-- Follow responsible disclosure practices
-- Respect rate limits and target system resources
-- Review local laws and regulations before testing
-
-##  Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-### Development Setup
+### Example Usage
 
 ```bash
-# Clone and setup development environment
+# Start a scan
+curl -X POST http://localhost:8000/api/scan \
+  -H "Content-Type: application/json" \
+  -d '{"target": "192.168.1.0/24", "scan_type": "full"}'
+
+# Get scan results
+curl http://localhost:8000/api/scan/123/results
+
+# Get vulnerabilities
+curl http://localhost:8000/api/vulns?severity=critical
+```
+
+---
+
+## 🛠️ Development
+
+### Local Development
+
+```bash
+# Clone the repository
 git clone https://github.com/OneByJorah/Network-Scanner.git
 cd Network-Scanner
 
-# Install development dependencies
-pip install -r backend/requirements.txt
-npm install --prefix frontend
+# Backend setup
+cd backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+
+# Start backend
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+# Frontend setup (new terminal)
+cd ../frontend
+npm install
+npm run dev
 ```
 
-##  Support
+### Running Tests
 
--  **Documentation**: [Wiki](https://github.com/OneByJorah/Network-Scanner/wiki)
--  **Bug Reports**: [Issues](https://github.com/OneByJorah/Network-Scanner/issues)
--  **Discussions**: [GitHub Discussions](https://github.com/OneByJorah/Network-Scanner/discussions)
+```bash
+# Backend tests
+cd backend
+pytest
 
-##  Acknowledgments
-
-- Built with Flask, React, and modern web technologies
-- Integrates nmap, dnspython, and other security tools
-- UI components from Material-UI
-- Charts powered by Recharts
-- AI capabilities via OpenAI API
-
-##  Disclaimer
-
-Network Scanner is for educational and authorized testing purposes only. Users are responsible for complying with applicable laws and obtaining proper authorization before scanning any systems. The developers assume no liability for misuse of this tool.
+# Frontend tests
+cd frontend
+npm test
+```
 
 ---
 
-## 🔀 Fork Notes
+## 🤝 Contributing
 
-This repository is a fork of the upstream Network-Scanner project maintained by **OneByJorah**.
-
-**Changes from upstream:**
-- `.env.example` already present (enhanced with additional configuration options)
-- `Dockerfile.backend` and `Dockerfile.frontend` already present
-- `docker-compose.yml` already present with Redis, PostgreSQL, backend, frontend, and Nginx
+Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ---
 
-**Made with ❤️ for the cybersecurity community**
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🔒 Security
+
+For security concerns, please see [SECURITY.md](SECURITY.md).
+
+---
+
+## 💬 Support
+
+- 📧 Email: support@jorah.one
+- 🐛 Issues: [GitHub Issues](https://github.com/OneByJorah/Network-Scanner/issues)
+- 📖 Docs: [Documentation](docs/)
+
+---
+
+<div align="center">
+
+  **Built with ❤️ by [Jhonattan L. Jimenez](https://github.com/OneByJorah)**
+
+  [⬆ Back to Top](#-network-scanner)
+
+</div>
