@@ -1,277 +1,177 @@
 <div align="center">
-
-  <img src="https://raw.githubusercontent.com/OneByJorah/Network-Scanner/main/docs/logo.png" alt="Network Scanner Logo" width="120">
-
-  # 🔍 Network Scanner
-
-  **AI-Powered Network Scanner & Vulnerability Assessment Tool**
-
-  Comprehensive network discovery and security scanning with intelligent vulnerability detection
-
-  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-  [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
-  [![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)](https://react.dev/)
-  [![nmap](https://img.shields.io/badge/nmap-Network%20Scanner-green)](https://nmap.org/)
-  [![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)](https://www.docker.com/)
-
-  [Features](#-features) • [Quick Start](#-quick-start) • [Architecture](#-architecture) • [API](#-api-reference) • [Contributing](#-contributing)
-
+  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white">
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black">
+  <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white">
+  <img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge">
+  <img src="https://img.shields.io/badge/nmap-4682B4?style=for-the-badge&logo=security&logoColor=white">
 </div>
 
----
-
-## 📸 Screenshots
+<br>
 
 <div align="center">
-
-| Network Map | Vulnerability Report | Scan Results |
-|-------------|---------------------|--------------|
-| ![Network Map](docs/screenshots/network-map.png) | ![Vulnerabilities](docs/screenshots/vulnerabilities.png) | ![Scan Results](docs/screenshots/scan-results.png) |
-
+  <h1>Network-Scanner</h1>
+  <p><strong>AI-Powered Network & Vulnerability Scanner</strong></p>
+  <p>nmap + Python + Flask + React. CLI, Web UI, API & PDF reports for pentesting & recon.</p>
+  <p>
+    <a href="#features">Features</a> •
+    <a href="#quick-start">Quick Start</a> •
+    <a href="#architecture">Architecture</a> •
+    <a href="#contributing">Contributing</a>
+  </p>
 </div>
 
-> 💡 **Tip:** Network Scanner uses AI to intelligently prioritize and categorize vulnerabilities
-
 ---
 
-## ✨ Features
+## Screenshot
 
-| Feature | Description |
-|---------|-------------|
-| 🔍 **Network Discovery** | Automatic host and service detection |
-| 🛡️ **Vulnerability Scanning** | CVE detection and risk assessment |
-| 🤖 **AI Analysis** | Intelligent vulnerability prioritization |
-| 📊 **Visual Reports** | Interactive network maps and charts |
-| 📈 **Historical Tracking** | Track changes over time |
-| 🔌 **REST API** | Full programmatic access |
-| 🐳 **Docker Ready** | One-command deployment |
-| 📱 **Web Dashboard** | Modern, responsive UI |
+![Network-Scanner Dashboard](docs/screenshot.png)
+*AI-powered network scanner dashboard with vulnerability reports and PDF export.*
 
----
+## Features
 
-## 🚀 Quick Start
+- **Network Discovery** — Automated host discovery and port scanning with nmap.
+- **Vulnerability Detection** — AI-powered vulnerability prioritization and CVE matching.
+- **Multiple Interfaces** — CLI, Web UI, and REST API for flexible usage.
+- **PDF Reports** — Generate professional penetration testing reports.
+- **Real-Time Scanning** — Live scan progress with WebSocket updates.
+- **Scan History** — Track and compare scans over time.
+- **Flask Backend** — Lightweight Python backend with SQLAlchemy.
+- **React Dashboard** — Modern, responsive web interface.
 
-### Prerequisites
+## Quick Start
 
-- Docker & Docker Compose
-- Git
-- Network access to target systems
-
-### Installation
+### Web UI
 
 ```bash
-# Clone the repository
 git clone https://github.com/OneByJorah/Network-Scanner.git
 cd Network-Scanner
 
-# Start with Docker
-docker compose up -d
+pip install -r requirements.txt
+python3 app.py
 ```
 
-### Access the Dashboard
+Open **http://localhost:5000** in your browser.
 
-Open **http://localhost:3000** in your browser
-
-### CLI Usage
+### CLI
 
 ```bash
-# Scan a network
-python scanner.py --target 192.168.1.0/24
+# Basic network scan
+python3 scanner.py scan 192.168.1.0/24
 
-# Scan specific ports
-python scanner.py --target 192.168.1.1 --ports 80,443,22
+# Vulnerability scan
+python3 scanner.py vuln 192.168.1.1
 
-# Generate report
-python scanner.py --target 192.168.1.0/24 --output report.json
+# Generate PDF report
+python3 scanner.py report --target 192.168.1.1 --output report.pdf
 ```
 
----
+## Usage Examples
 
-## 🏗️ Architecture
+```bash
+# Quick host discovery
+python3 scanner.py discover 10.0.0.0/24
 
-```
-┌─────────────────────────────────────────────────────────────┐
-│                   Network Scanner                           │
-├─────────────────────────────────────────────────────────────┤
-│                                                             │
-│   ┌──────────┐      ┌──────────┐      ┌──────────────┐    │
-│   │ Browser  │ ───▶ │ React    │ ───▶ │ FastAPI      │    │
-│   │   SPA    │ ◀─── │ Frontend │ ◀─── │ Backend      │    │
-│   └──────────┘      └──────────┘      └──────┬───────┘    │
-│                                               │             │
-│                                   ┌───────────┴──────────┐ │
-│                                   │                      │ │
-│                                   ▼                      ▼ │ │
-│                            ┌──────────┐          ┌──────────┐ │
-│                            │  nmap    │          │ AI       │ │
-│                            │  Engine  │          │ Analyzer │ │
-│                            └──────────┘          └──────────┘ │
-│                                                               │
-│  ┌─────────────────────────────────────────────────────────┐ │
-│  │                  Data Store                             │ │
-│  │  ┌──────────┐  ┌──────────┐  ┌──────────┐             │ │
-│  │  │ SQLite   │  │ CVE      │  │ Reports  │             │ │
-│  │  │ Results  │  │ Database │  │ Storage  │             │ │
-│  │  └──────────┘  └──────────┘  └──────────┘             │ │
-│  └─────────────────────────────────────────────────────────┘ │
-│                                                               │
-└─────────────────────────────────────────────────────────────┘
+# Full port scan
+python3 scanner.py scan 192.168.1.1 --ports 1-65535
+
+# Service version detection
+python3 scanner.py scan 192.168.1.1 --services
+
+# Export results
+python3 scanner.py scan 192.168.1.0/24 --format json --output results.json
 ```
 
-### Tech Stack
+## Environment Variables
 
-| Component | Technology |
-|-----------|------------|
-| **Backend** | Python 3.10+, FastAPI |
-| **Frontend** | React 18, TypeScript, Tailwind CSS |
-| **Scanning** | nmap, custom Python scanners |
-| **AI/ML** | scikit-learn, TensorFlow |
-| **Database** | SQLite / PostgreSQL |
-| **Deployment** | Docker Compose |
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `FLASK_APP` | `app.py` | Flask application entry point |
+| `SECRET_KEY` | *(empty)* | Flask secret key |
+| `DATABASE_URL` | `sqlite:///scanner.db` | Database connection string |
+| `NMAP_PATH` | `/usr/bin/nmap` | Path to nmap binary |
+| `REPORT_DIR` | `./reports` | PDF report storage directory |
 
----
+## Architecture
 
-## 📁 Project Structure
+```
+Browser (React) ──HTTP/WebSocket──▶ Flask Backend ──▶ SQLite
+                                        │
+                                        ├──▶ nmap Scanner
+                                        ├──▶ AI Vulnerability Analysis
+                                        ├──▶ CVE Database
+                                        └──▶ PDF Generator
+```
+
+## Tech Stack
+
+- **Backend**: Flask (Python 3.10+), SQLAlchemy
+- **Frontend**: React 18 (TypeScript)
+- **Scanning**: nmap, custom Python wrappers
+- **AI**: Vulnerability prioritization and CVE matching
+- **Database**: SQLite (default), PostgreSQL (production)
+- **Reports**: ReportLab for PDF generation
+
+## Project Structure
 
 ```
 Network-Scanner/
-├── backend/                  # FastAPI backend
-│   ├── main.py              # Application entry
-│   ├── scanners/            # Scanning engines
-│   │   ├── nmap_scanner.py  # nmap wrapper
-│   │   └── vuln_scanner.py  # Vulnerability scanner
-│   ├── ai/                  # AI analysis
-│   │   ├── analyzer.py      # Vulnerability analyzer
-│   │   └── models/          # ML models
-│   └── routers/             # API routes
-├── frontend/                # React SPA
+├── app.py                 # Flask application
+├── scanner/
+│   ├── __init__.py
+│   ├── nmap_wrapper.py    # nmap integration
+│   ├── vulnerability.py   # AI vulnerability analysis
+│   ├── cve_lookup.py      # CVE database queries
+│   └── report_gen.py      # PDF report generation
+├── routes/
+│   ├── scan.py            # Scan endpoints
+│   ├── results.py         # Results endpoints
+│   └── reports.py         # Report endpoints
+├── frontend/
 │   ├── src/
-│   │   ├── components/      # UI components
-│   │   ├── pages/           # Page components
-│   │   └── hooks/           # Custom hooks
-│   └── public/              # Static assets
-├── cli/                     # CLI tool
-│   └── scanner.py           # Command-line scanner
-├── docs/                    # Documentation
-│   └── screenshots/         # Dashboard screenshots
-├── docker-compose.yml       # Docker deployment
-└── requirements.txt         # Python dependencies
+│   │   ├── components/    # React components
+│   │   └── pages/         # Dashboard pages
+│   └── package.json
+├── templates/             # Jinja2 templates
+├── reports/               # Generated PDFs (gitignored)
+├── requirements.txt       # Python dependencies
+└── .env.example           # Configuration template
 ```
 
----
-
-## 🔌 API Reference
-
-### Scanning
+## API Endpoints
 
 | Endpoint | Method | Description |
 |----------|--------|-------------|
-| `/api/scan` | `POST` | Start new scan |
-| `/api/scan/<id>` | `GET` | Get scan status |
-| `/api/scan/<id>/results` | `GET` | Get scan results |
-| `/api/scan/<id>/cancel` | `POST` | Cancel scan |
+| `/api/scan` | POST | Start a new scan |
+| `/api/scan/{id}` | GET | Get scan status |
+| `/api/scan/{id}/results` | GET | Get scan results |
+| `/api/results` | GET | List all scan results |
+| `/api/results/{id}/vulns` | GET | Get vulnerabilities |
+| `/api/reports/{id}/pdf` | GET | Download PDF report |
 
-### Vulnerabilities
+## Scan Types
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/vulns` | `GET` | List vulnerabilities |
-| `/api/vulns/<id>` | `GET` | Get vulnerability details |
-| `/api/vulns/stats` | `GET` | Vulnerability statistics |
+| Type | Description |
+|------|-------------|
+| `discover` | Host discovery only |
+| `scan` | Port scan with service detection |
+| `vuln` | Vulnerability assessment |
+| `full` | Complete scan with all options |
 
-### Reports
+## Contributing
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/reports` | `GET` | List reports |
-| `/api/reports/<id>` | `GET` | Get report |
-| `/api/reports/<id>/export` | `GET` | Export report (PDF/CSV) |
+Contributions are welcome. Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines and [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community standards.
 
-### Example Usage
+## Security
 
-```bash
-# Start a scan
-curl -X POST http://localhost:8000/api/scan \
-  -H "Content-Type: application/json" \
-  -d '{"target": "192.168.1.0/24", "scan_type": "full"}'
+For security concerns, see [SECURITY.md](SECURITY.md). Please report vulnerabilities to **info@jorahone.com** — do not use public issues.
 
-# Get scan results
-curl http://localhost:8000/api/scan/123/results
+## License
 
-# Get vulnerabilities
-curl http://localhost:8000/api/vulns?severity=critical
-```
-
----
-
-## 🛠️ Development
-
-### Local Development
-
-```bash
-# Clone the repository
-git clone https://github.com/OneByJorah/Network-Scanner.git
-cd Network-Scanner
-
-# Backend setup
-cd backend
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-
-# Start backend
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-
-# Frontend setup (new terminal)
-cd ../frontend
-npm install
-npm run dev
-```
-
-### Running Tests
-
-```bash
-# Backend tests
-cd backend
-pytest
-
-# Frontend tests
-cd frontend
-npm test
-```
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-
-## 🔒 Security
-
-For security concerns, please see [SECURITY.md](SECURITY.md).
-
----
-
-## 💬 Support
-
-- 📧 Email: support@jorah.one
-- 🐛 Issues: [GitHub Issues](https://github.com/OneByJorah/Network-Scanner/issues)
-- 📖 Docs: [Documentation](docs/)
+MIT © Jhonattan L. Jimenez
 
 ---
 
 <div align="center">
-
-  **Built with ❤️ by [Jhonattan L. Jimenez](https://github.com/OneByJorah)**
-
-  [⬆ Back to Top](#-network-scanner)
-
+  <p>AI-powered network and vulnerability scanner.</p>
+  <p><a href="https://github.com/OneByJorah">@OneByJorah</a></p>
 </div>
