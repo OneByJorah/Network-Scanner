@@ -46,3 +46,6 @@ logs/
 # Docker volumes
 postgres_data/
 redis_data/
+
+# OneByJorah portfolio tooling
+.venv-screenshot/

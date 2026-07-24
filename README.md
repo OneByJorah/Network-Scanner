@@ -1,31 +1,25 @@
 <div align="center">
-  <img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white">
-  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black">
-  <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white">
-  <img src="https://img.shields.io/badge/license-MIT-blue?style=for-the-badge">
-  <img src="https://img.shields.io/badge/nmap-4682B4?style=for-the-badge&logo=security&logoColor=white">
-</div>
 
-<br>
+![Network-Scanner banner](docs/assets/banner.svg)
 
-<div align="center">
-  <h1>Network-Scanner</h1>
-  <p><strong>AI-Powered Network & Vulnerability Scanner</strong></p>
-  <p>nmap + Python + Flask + React. CLI, Web UI, API & PDF reports for pentesting & recon.</p>
-  <p>
-    <a href="#features">Features</a> •
-    <a href="#quick-start">Quick Start</a> •
-    <a href="#architecture">Architecture</a> •
-    <a href="#contributing">Contributing</a>
-  </p>
+# Network-Scanner
+
+AI-powered network scanner & vulnerability scanner
+
+![License](https://img.shields.io/badge/license-MIT-brightgreen)
+![Language](https://img.shields.io/badge/language-JavaScript-blue)
+![Fork](https://img.shields.io/badge/status-fork-orange)
 </div>
 
 ---
 
-## Screenshot
+<p align="center">
+  <img src="docs/assets/screenshot.png" alt="Network-Scanner preview" width="90%">
+</p>
 
-![Network-Scanner Dashboard](docs/screenshot.png)
-*AI-powered network scanner dashboard with vulnerability reports and PDF export.*
+<br>
+
+---
 
 ## Features
 
@@ -55,7 +49,6 @@ Open **http://localhost:5000** in your browser.
 ### CLI
 
 ```bash
-# Basic network scan
 python3 scanner.py scan 192.168.1.0/24
 
 # Vulnerability scan
@@ -171,7 +164,18 @@ MIT © Jhonattan L. Jimenez
 
 ---
 
-<div align="center">
-  <p>AI-powered network and vulnerability scanner.</p>
-  <p><a href="https://github.com/OneByJorah">@OneByJorah</a></p>
-</div>
+## 🤝 Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). All contributions follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+
+## 🔒 Security
+
+Found a vulnerability? Please follow our [Security Policy](SECURITY.md) and report privately to `security@jorahone.com`.
+
+## 📄 License
+
+[MIT License](LICENSE) © Jhonattan L. Jimenez (OneByJorah)
+
+---
+
+<p align="center">Built with 🌴 by <a href="https://github.com/OneByJorah">OneByJorah</a> · <a href="https://jorahone.com">jorahone.com</a></p>
