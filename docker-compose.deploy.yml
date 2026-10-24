@@ -1,0 +1,20 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: network-scanner-backend
+    ports:
+      - "5012:5000"
+    environment:
+      - FLASK_ENV=production
+      - DATABASE_URL=postgresql://postgres:postgres@shared-postgres:5432/network_scanner
+      - REDIS_URL=redis://shared-redis:6379
+      - SECRET_KEY=network-scanner-secret-key
+    networks:
+      - shared-infrastructure_default
+    restart: unless-stopped
+
+networks:
+  shared-infrastructure_default:
+    external: true
