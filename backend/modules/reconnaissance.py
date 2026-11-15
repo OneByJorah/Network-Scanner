@@ -97,8 +97,8 @@ class ReconModule:
                         names = name_value.split('\n')
                         for domain_name in names:
                             domain_name = domain_name.strip()
-                            if name.endswith(f'.{domain}') or name == domain:
-                                subdomains.add(name)
+                            if domain_name.endswith(f'.{domain}') or domain_name == domain:
+                                subdomains.add(domain_name)
                 
                 print(f"[INFO] Certificate transparency found {len(subdomains)} entries")
                 return list(subdomains)
