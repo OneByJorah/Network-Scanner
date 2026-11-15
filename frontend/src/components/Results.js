@@ -35,7 +35,7 @@ import {
   Security as SecurityIcon
 } from '@mui/icons-material';
 import { useScan } from '../context/ScanContext';
-import ReactJson from 'react-json-view';
+import ReactJson from '@microlink/react-json-view';
 
 const Results = ({ showNotification }) => {
   const { scanHistory, removeScanFromHistory, generateReport } = useScan();

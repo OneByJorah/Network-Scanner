@@ -39,7 +39,7 @@ import {
   Api as ApiIcon,
   Notifications as NotificationsIcon,
   Settings as SettingsIcon,
-  StorageIcon,
+  Storage as StorageIcon,
   NetworkCheck as NetworkIcon
 } from '@mui/icons-material';
 import { useScan } from '../context/ScanContext';
